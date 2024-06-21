@@ -1,0 +1,10 @@
+# target
+build
+*.o
+*.a
+*.exe
+
+# others
+*.swp
+.cache
+.vscode

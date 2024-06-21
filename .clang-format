@@ -1,0 +1,67 @@
+# 默认样式: LLVM, Google, Chromium, Mozilla, WebKit, Microsoft, GNU
+BasedOnStyle: Microsoft
+# 缩进宽度
+IndentWidth: 4
+# 每行字符的限制，0表示没有限制
+ColumnLimit: 140
+
+# 语言: None, Cpp, Java, JavaScript, ObjC, Proto, TableGen, TextProto
+Language:  Cpp
+# 访问说明符(public、private等)的偏移
+AccessModifierOffset: -4
+# 在函数左括号后水平对齐参数
+AlignAfterOpenBracket: Align
+# 数组初始化时，将字段按列对齐
+AlignArrayOfStructures: Left
+# 转义换行符中反斜杠的对齐方式
+AlignEscapedNewlines: Left
+# 是否允许简单的枚举单独一行
+AllowShortEnumsOnASingleLine: false
+# 是否允许简单的函数单独一行
+AllowShortFunctionsOnASingleLine: false
+# 允许简单的lambda表达式单独一行
+AllowShortLambdasOnASingleLine: Empty
+# 要使用的模板声明中断样式
+AlwaysBreakTemplateDeclarations: Yes
+# 指针标志所在位置
+PointerAlignment: Right
+# 构造函数初始化
+BreakConstructorInitializers: AfterColon
+# 宏定义缩进方式
+# IndentPPDirectives: BeforeHash
+# 最大空行间隔
+MaxEmptyLinesToKeep: 1
+# 构造函数初始化样式(clangd 不支持)
+# PackConstructorInitializers: CurrentLine
+# 头文件排序方式
+# IncludeBlocks: Regroup
+BinPackArguments: false
+BinPackParameters: false
+# case 缩进
+IndentCaseLabels: true
+# extern 缩进
+IndentExternBlock: Indent
+# 在块语句后保持空行
+KeepEmptyLinesAtTheStartOfBlocks: false
+AlignConsecutiveDeclarations: true
+StatementAttributeLikeMacros: []
+# 大括号换行方式
+BreakBeforeBraces: Custom
+# 大括号换行，仅当BreakBeforeBraces为Custom时生效
+BraceWrapping:
+  AfterControlStatement: Never
+  AfterCaseLabel: false
+  AfterClass: true
+  AfterEnum: false
+  AfterFunction: true
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: true
+  AfterExternBlock: true
+  BeforeCatch: false
+  BeforeElse: false
+  BeforeLambdaBody: false
+  BeforeWhile: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
