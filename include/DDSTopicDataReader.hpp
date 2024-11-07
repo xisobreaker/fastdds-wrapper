@@ -4,12 +4,11 @@
 #include <fastdds/dds/subscriber/DataReader.hpp>
 #include <fastdds/dds/subscriber/Subscriber.hpp>
 #include <fastdds/dds/topic/Topic.hpp>
-#include <glog/logging.h>
 
 template <typename T>
 class DDSTopicDataReader
 {
-    typedef std::function<void(std::shared_ptr<T>)> OnMessageCallback;
+    typedef std::function<void(const std::string &, std::shared_ptr<T>)> OnMessageCallback;
 
 public:
     DDSTopicDataReader(eprosima::fastdds::dds::Subscriber          *subscriber,

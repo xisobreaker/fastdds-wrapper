@@ -4,7 +4,6 @@
 #include <fastdds/dds/publisher/DataWriter.hpp>
 #include <fastdds/dds/publisher/Publisher.hpp>
 #include <fastdds/dds/publisher/qos/DataWriterQos.hpp>
-#include <glog/logging.h>
 
 template <typename T>
 class DDSTopicDataWriter

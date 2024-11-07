@@ -4,7 +4,6 @@
 #include <fastdds/dds/publisher/qos/PublisherQos.hpp>
 #include <fastdds/dds/subscriber/Subscriber.hpp>
 #include <fastdds/dds/subscriber/qos/SubscriberQos.hpp>
-#include <glog/logging.h>
 #include <mutex>
 
 using namespace eprosima::fastdds::dds;

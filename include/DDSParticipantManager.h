@@ -27,7 +27,7 @@ public:
     DDSTopicDataWriter<T> *createDataWriter(std::string topicName);
 
     template <typename T>
-    DDSTopicDataReader<T> *createDataReader(std::string topicName, std::function<void(std::shared_ptr<T>)> callback);
+    DDSTopicDataReader<T> *createDataReader(std::string topicName, std::function<void(const std::string &, std::shared_ptr<T>)> callback);
 
 private:
     int                                   m_domainId;
@@ -47,7 +47,8 @@ DDSTopicDataWriter<T> *DDSParticipantManager::createDataWriter(std::string topic
 }
 
 template <typename T>
-DDSTopicDataReader<T> *DDSParticipantManager::createDataReader(std::string topicName, std::function<void(std::shared_ptr<T>)> callback)
+DDSTopicDataReader<T> *DDSParticipantManager::createDataReader(std::string                                                  topicName,
+                                                               std::function<void(const std::string &, std::shared_ptr<T>)> callback)
 {
     if (!m_participant->registerTopic(topicName, getTopicDataType(topicName)))
         return nullptr;

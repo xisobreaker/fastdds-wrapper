@@ -28,9 +28,9 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void processHelloWorldOne(std::shared_ptr<HelloWorldOne> data)
+void processHelloWorldOne(const std::string &topic_name, std::shared_ptr<HelloWorldOne> data)
 {
-    std::cout << "recv message: " << data->index() << std::endl;
+    std::cout << "recv message [" << topic_name << "]: " << data->index() << std::endl;
 }
 
 void run_dds_data_writer()

@@ -4,12 +4,14 @@
 #include <fastdds/dds/subscriber/DataReaderListener.hpp>
 #include <fastdds/dds/subscriber/Subscriber.hpp>
 #include <fastdds/dds/topic/TopicDescription.hpp>
+
+#define GLOG_USE_GLOG_EXPORT
 #include <glog/logging.h>
 
 template <typename T>
 class DDSDataReaderListener : public eprosima::fastdds::dds::DataReaderListener
 {
-    typedef std::function<void(std::shared_ptr<T>)> OnMessageCallback;
+    typedef std::function<void(const std::string &, std::shared_ptr<T>)> OnMessageCallback;
 
 protected:
     void on_subscription_matched(eprosima::fastdds::dds::DataReader *reader, const eprosima::fastdds::dds::SubscriptionMatchedStatus &info)
@@ -34,7 +36,7 @@ protected:
         std::shared_ptr<T>                 message = std::make_shared<T>();
         ReturnCode_t                       retCode = reader->take_next_sample(message.get(), &info);
         if (retCode == ReturnCode_t::RETCODE_OK && info.valid_data) {
-            m_callback(message);
+            m_callback(reader->get_topicdescription()->get_name(), message);
         } else {
             LOG(ERROR) << "take_next_sample error";
         }

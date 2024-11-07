@@ -25,9 +25,9 @@ public:
 
     template <typename T>
     DDSTopicDataReader<T> *createDataReader(
-        std::string                                  topicName,
-        std::function<void(std::shared_ptr<T>)>      callback,
-        const eprosima::fastdds::dds::DataReaderQos &dataReaderQos = eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT);
+        std::string                                                  topicName,
+        std::function<void(const std::string &, std::shared_ptr<T>)> callback,
+        const eprosima::fastdds::dds::DataReaderQos                 &dataReaderQos = eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT);
 
     bool registerTopic(std::string                             topicName,
                        eprosima::fastdds::dds::TopicDataType  *dataType,
@@ -54,9 +54,9 @@ DDSTopicDataWriter<T> *DDSDomainParticipant::createDataWriter(std::string topicN
 }
 
 template <typename T>
-DDSTopicDataReader<T> *DDSDomainParticipant::createDataReader(std::string                                  topicName,
-                                                              std::function<void(std::shared_ptr<T>)>      callback,
-                                                              const eprosima::fastdds::dds::DataReaderQos &dataReaderQos)
+DDSTopicDataReader<T> *DDSDomainParticipant::createDataReader(std::string                                                  topicName,
+                                                              std::function<void(const std::string &, std::shared_ptr<T>)> callback,
+                                                              const eprosima::fastdds::dds::DataReaderQos                 &dataReaderQos)
 {
     std::lock_guard<std::mutex> guard(m_topicLock);
     if (m_mapTopics.find(topicName) == m_mapTopics.end())

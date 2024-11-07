@@ -3,6 +3,8 @@
 #include <fastdds/dds/publisher/DataWriter.hpp>
 #include <fastdds/dds/publisher/DataWriterListener.hpp>
 #include <fastdds/dds/topic/Topic.hpp>
+
+#define GLOG_USE_GLOG_EXPORT
 #include <glog/logging.h>
 
 class DDSDataWriterListener : public eprosima::fastdds::dds::DataWriterListener
