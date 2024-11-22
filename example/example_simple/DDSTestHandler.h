@@ -11,5 +11,7 @@ public:
     ~DDSTestHandler();
 
 protected:
-    ParticipantQosHandler createParticipantQos(std::string participantName) override;
+    ParticipantQosHandler createParticipantQos(const std::string              &participant_name,
+                                               uint16_t                        listen_port,
+                                               const std::vector<std::string> &peer_locators) override;
 };

@@ -1,4 +1,14 @@
-#pragma once
+// =====================================================================================
+//  Copyright (C) 2024 by Jiaxing Shao. All rights reserved
+//
+//  文 件 名:  DDSDataWriterListener.hpp
+//  作    者:  Jiaxing Shao, 980853650@qq.com
+//  创建时间:  2024-11-22 15:46:10
+//  描    述:
+// =====================================================================================
+
+#ifndef DDS_DATAWRITER_LISTENER_H_H_H
+#define DDS_DATAWRITER_LISTENER_H_H_H
 
 #include <fastdds/dds/publisher/DataWriter.hpp>
 #include <fastdds/dds/publisher/DataWriterListener.hpp>
@@ -32,3 +42,5 @@ protected:
         LOG(INFO) << "on_liveliness_lost: " << status.total_count;
     }
 };
+
+#endif

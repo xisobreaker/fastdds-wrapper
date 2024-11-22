@@ -1,3 +1,12 @@
+// =====================================================================================
+//  Copyright (C) 2024 by Jiaxing Shao. All rights reserved
+//
+//  文 件 名:  DDSDomainParticipant.h
+//  作    者:  Jiaxing Shao, 980853650@qq.com
+//  创建时间:  2024-11-22 16:18:58
+//  描    述:
+// =====================================================================================
+
 #ifndef DDS_DOMAIN_PARTICIPANT_H_H_H
 #define DDS_DOMAIN_PARTICIPANT_H_H_H
 

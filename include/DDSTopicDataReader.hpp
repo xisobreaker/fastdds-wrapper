@@ -1,4 +1,14 @@
-#pragma once
+// =====================================================================================
+//  Copyright (C) 2024 by Jiaxing Shao. All rights reserved
+//
+//  文 件 名:  DDSTopicDataReader.hpp
+//  作    者:  Jiaxing Shao, 980853650@qq.com
+//  创建时间:  2024-11-22 16:19:16
+//  描    述:
+// =====================================================================================
+
+#ifndef DDS_TOPIC_DATAREADER_H_H_H
+#define DDS_TOPIC_DATAREADER_H_H_H
 
 #include "DDSDataReaderListener.hpp"
 #include <fastdds/dds/subscriber/DataReader.hpp>
@@ -40,3 +50,5 @@ DDSTopicDataReader<T>::~DDSTopicDataReader()
     if (m_dataReader)
         m_subscriber->delete_datareader(m_dataReader);
 }
+
+#endif

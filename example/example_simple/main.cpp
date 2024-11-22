@@ -36,7 +36,7 @@ void processHelloWorldOne(const std::string &topic_name, std::shared_ptr<HelloWo
 void run_dds_data_writer()
 {
     DDSTestHandler handler(170);
-    handler.initDomainParticipant("test_writer");
+    handler.initDomainParticipant("test_writer", 10002, {"127.0.0.1:10001"});
     DDSTopicDataWriter<HelloWorldOne> *dataWriter = handler.createDataWriter<HelloWorldOne>(DDS_TOPIC_HELLO_WORLD_ONE);
 
     bool runFlag = true;
@@ -62,7 +62,7 @@ void run_dds_data_writer()
 void run_dds_data_reader()
 {
     DDSTestHandler handler(170);
-    handler.initDomainParticipant("test_reader");
+    handler.initDomainParticipant("test_reader", 10001, {"127.0.0.1:10002"});
     DDSTopicDataReader<HelloWorldOne> *dataReader =
         handler.createDataReader<HelloWorldOne>(DDS_TOPIC_HELLO_WORLD_ONE, processHelloWorldOne);
 

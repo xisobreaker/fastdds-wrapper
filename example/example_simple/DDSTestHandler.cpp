@@ -33,9 +33,14 @@ DDSTestHandler::~DDSTestHandler()
 {
 }
 
-ParticipantQosHandler DDSTestHandler::createParticipantQos(std::string participantName)
+ParticipantQosHandler DDSTestHandler::createParticipantQos(const std::string              &participant_name,
+                                                           uint16_t                        listen_port,
+                                                           const std::vector<std::string> &peer_locators)
 {
-    ParticipantQosHandler participantQos(participantName);
+    ParticipantQosHandler participantQos(participant_name);
     participantQos.addUDPV4Transport(1024 * 1024 * 16);
+    // participantQos.addUDPV6Transport(1024 * 1024 * 16);
+    // participantQos.addSHMTransport(1024 * 1024 * 16);
+    // participantQos.addTCPV4Transport(listen_port, peer_locators);
     return participantQos;
 }

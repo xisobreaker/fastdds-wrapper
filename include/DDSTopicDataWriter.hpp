@@ -1,4 +1,14 @@
-#pragma once
+// =====================================================================================
+//  Copyright (C) 2024 by Jiaxing Shao. All rights reserved
+//
+//  文 件 名:  DDSTopicDataWriter.hpp
+//  作    者:  Jiaxing Shao, 980853650@qq.com
+//  创建时间:  2024-11-22 16:19:22
+//  描    述:
+// =====================================================================================
+
+#ifndef DDS_TOPIC_DATAWRITER_H_H_H
+#define DDS_TOPIC_DATAWRITER_H_H_H
 
 #include "DDSDataWriterListener.hpp"
 #include <fastdds/dds/publisher/DataWriter.hpp>
@@ -43,3 +53,5 @@ bool DDSTopicDataWriter<T>::writeMessage(const T &message)
 {
     return m_dataWriter->write((void *)&message);
 }
+
+#endif

@@ -1,4 +1,14 @@
-#pragma once
+// =====================================================================================
+//  Copyright (C) 2024 by Jiaxing Shao. All rights reserved
+//
+//  文 件 名:  DDSDataReaderListener.hpp
+//  作    者:  Jiaxing Shao, 980853650@qq.com
+//  创建时间:  2024-11-22 15:46:03
+//  描    述:
+// =====================================================================================
+
+#ifndef DDS_DATAREADER_LISTENER_H_H_H
+#define DDS_DATAREADER_LISTENER_H_H_H
 
 #include <fastdds/dds/subscriber/DataReader.hpp>
 #include <fastdds/dds/subscriber/DataReaderListener.hpp>
@@ -45,3 +55,5 @@ protected:
 public:
     OnMessageCallback m_callback;
 };
+
+#endif
