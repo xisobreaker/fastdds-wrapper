@@ -1,6 +1,7 @@
 #include <cstring>
 #include <iostream>
 #include <memory>
+#include <thread>
 
 #include "DDSConstants.h"
 #include "DDSTestHandler.h"
@@ -13,6 +14,7 @@ void run_dds_data_reader();
 
 int main(int argc, char *argv[])
 {
+#if 1
     if (argc < 2) {
         std::cerr << "Usage: " << argv[0] << " sub/pub" << std::endl;
         return -1;
@@ -25,6 +27,11 @@ int main(int argc, char *argv[])
     } else {
         std::cerr << "unknown command: " << argv[1] << std::endl;
     }
+#endif
+
+#if 0
+    run_dds_data_reader();
+#endif
     return 0;
 }
 

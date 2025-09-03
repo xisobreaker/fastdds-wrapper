@@ -1,19 +1,10 @@
 #include "DDSTestHandler.h"
 #include "DDSConstants.h"
-#include "DDSTopicDataReader.hpp"
-#include "DDSTopicDataWriter.hpp"
-#include "HelloWorldOne.h"
 #include "HelloWorldOnePubSubTypes.h"
-#include "HelloWorldTwo.h"
 #include "HelloWorldTwoPubSubTypes.h"
 #include "ParticipantQosHandler.h"
-#include <chrono>
 #include <fastdds/dds/topic/TopicDataType.hpp>
 #include <fastdds/dds/topic/qos/TopicQos.hpp>
-#include <functional>
-#include <glog/logging.h>
-#include <unordered_map>
-#include <utility>
 
 using namespace eprosima::fastdds::dds;
 using namespace eprosima::fastdds::rtps;

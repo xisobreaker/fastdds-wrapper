@@ -37,8 +37,7 @@ template <typename T>
 DDSTopicDataReader<T>::DDSTopicDataReader(eprosima::fastdds::dds::Subscriber          *subscriber,
                                           eprosima::fastdds::dds::Topic               *topic,
                                           OnMessageCallback                            callback,
-                                          const eprosima::fastdds::dds::DataReaderQos &dataReaderQos) :
-    m_subscriber(subscriber)
+                                          const eprosima::fastdds::dds::DataReaderQos &dataReaderQos) : m_subscriber(subscriber)
 {
     m_readerListener.m_callback = callback;
     m_dataReader = subscriber->create_datareader(topic, dataReaderQos, &m_readerListener);

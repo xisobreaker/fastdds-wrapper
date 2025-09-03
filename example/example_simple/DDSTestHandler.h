@@ -1,8 +1,6 @@
 #pragma once
 
 #include "DDSParticipantManager.h"
-#include <functional>
-#include <unordered_map>
 
 class DDSTestHandler : public DDSParticipantManager
 {

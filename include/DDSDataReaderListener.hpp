@@ -27,12 +27,8 @@ protected:
     void on_subscription_matched(eprosima::fastdds::dds::DataReader *reader, const eprosima::fastdds::dds::SubscriptionMatchedStatus &info)
     {
         const eprosima::fastdds::dds::TopicDescription *topic = reader->get_topicdescription();
-
-        if (info.current_count_change == 1) {
-            LOG(INFO) << "subscription " << topic->get_name() << " matched";
-        } else if (info.current_count_change == -1) {
-            LOG(INFO) << "subscription " << topic->get_name() << " unmatched";
-        }
+        LOG(INFO) << "last_publication_handle: " << info.last_publication_handle;
+        LOG(INFO) << "subscription " << topic->get_name() << (info.current_count_change == 1 ? " matched" : " unmatched");
     }
 
     void on_liveliness_changed(eprosima::fastdds::dds::DataReader *reader, const eprosima::fastrtps::LivelinessChangedStatus &status)

@@ -10,6 +10,7 @@
 #ifndef DDS_DOMAIN_PARTICIPANT_H_H_H
 #define DDS_DOMAIN_PARTICIPANT_H_H_H
 
+#include "DDSParticipantListener.h"
 #include "DDSTopicDataReader.hpp"
 #include "DDSTopicDataWriter.hpp"
 
@@ -50,6 +51,7 @@ private:
     eprosima::fastdds::dds::Publisher                               *m_publisher;
     std::unordered_map<std::string, eprosima::fastdds::dds::Topic *> m_mapTopics;
     std::mutex                                                       m_topicLock;
+    DDSParticipantListener                                          *m_participantListener;
 };
 
 template <typename T>
