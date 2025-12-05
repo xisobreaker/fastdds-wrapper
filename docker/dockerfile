@@ -1,0 +1,104 @@
+FROM ubuntu:22.04 
+
+SHELL ["/bin/bash", "-c"]
+
+WORKDIR /tmp
+ENV DEBIAN_FRONTEND noninteractive
+RUN yes | unminimize
+RUN apt update && apt install -y --no-install-recommends           \
+    g++ make autoconf automake cmake gdb wget curl lsb-release git \
+    lsb-release libasio-dev                                        \
+    && :
+
+# --------------------------------------------------------------------------
+ARG PKG=tinyxml2
+ARG VER=9.0.0
+RUN wget -q --content-disposition                                          \
+    https://codeload.github.com/leethomason/${PKG}/tar.gz/refs/tags/${VER}
+RUN tar -zxf ${PKG}-${VER}.tar.gz                                          \
+    && cmake -S ${PKG}-${VER} -B ${PKG}_build                              \
+    "-DBUILD_SHARED_LIBS=ON"                                               \
+    && make -C ${PKG}_build -j$(nproc) install/strip                       \
+    && rm -rf ${PKG}-${VER} ${PKG}_build ${PKG}-${VER}.tar.gz
+# --------------------------------------------------------------------------
+ARG PKG=gflags
+ARG VER=2.2.2
+RUN wget -q --content-disposition                                          \
+    https://codeload.github.com/gflags/${PKG}/tar.gz/refs/tags/v${VER}
+RUN tar -xf ${PKG}-${VER}.tar.gz                                           \
+    && cmake -S ${PKG}-${VER}                                              \
+    -B ${PKG}-${VER}-build                                                 \
+    "-DCMAKE_INSTALL_PREFIX=/usr/local/"                                   \
+    "-DCMAKE_BUILD_TYPE=Release" "-DBUILD_TESTS=OFF" "-DBUILD_TESTING=OFF" \
+    "-DCMAKE_SKIP_INSTALL_RPATH=ON" "-DCMAKE_POSITION_INDEPENDENT_CODE=ON" \
+    "-DBUILD_SHARED_LIBS=ON" "-DBUILD_STATIC_LIBS=ON"                      \
+    && make -C ${PKG}-${VER}-build -j$(nproc) install/strip                \
+    && rm -rf ${PKG}-${VER}  ${PKG}-${VER}-build ${PKG}-${VER}.tar.gz
+# --------------------------------------------------------------------------
+ARG PKG=glog
+ARG VER=0.7.1
+RUN wget -q --content-disposition                                          \
+    https://codeload.github.com/google/${PKG}/tar.gz/refs/tags/v${VER}
+RUN tar -xf ${PKG}-${VER}.tar.gz                                           \
+    && cmake -S ${PKG}-${VER}                                              \
+    -B ${PKG}-${VER}-build                                                 \
+    "-DCMAKE_INSTALL_PREFIX=/usr/local/"                                   \
+    "-DCMAKE_BUILD_TYPE=Release" "-DBUILD_TESTS=OFF" "-DBUILD_TESTING=OFF" \
+    "-DCMAKE_SKIP_INSTALL_RPATH=ON" "-DCMAKE_POSITION_INDEPENDENT_CODE=ON" \
+    "-DBUILD_SHARED_LIBS=ON"                                               \
+    "-DWITH_THREADS=ON"                                                    \
+    "-DWITH_TLS=OFF"                                                       \
+    "-DWITH_GFLAGS=OFF"                                                    \
+    && make -C ${PKG}-${VER}-build -j$(nproc) install/strip                \
+    && rm -rf ${PKG}-${VER}  ${PKG}-${VER}-build ${PKG}-${VER}.tar.gz
+# --------------------------------------------------------------------------
+ARG PKG=foonathan_memory_vendor
+ARG VER=1.3.1
+RUN wget -q --content-disposition                                          \
+    https://codeload.github.com/eProsima/${PKG}/tar.gz/refs/tags/v${VER}
+RUN tar -zxf ${PKG}-${VER}.tar.gz                                          \
+    && sed -i 's/https:\/\/github.com\/foonathan\/memory\.git/http:\/\/10\.202\.1\.15:8080\/github-fork\/foonathan_memory\.git/g' ${PKG}-${VER}/CMakeLists.txt \
+    && cmake -S ${PKG}-${VER} -B ${PKG}_build                              \
+    "-DBUILD_SHARED_LIBS=ON"                                               \
+    && make -C ${PKG}_build -j$(nproc) install/strip                       \
+    && rm -rf ${PKG}-${VER} ${PKG}_build ${PKG}-${VER}.tar.gz
+# --------------------------------------------------------------------------
+ARG PKG=Fast-CDR
+ARG VER=2.2.5
+RUN wget -q --content-disposition                                          \
+    https://codeload.github.com/eProsima/${PKG}/tar.gz/refs/tags/v${VER}
+RUN tar -zxf ${PKG}-${VER}.tar.gz                                          \
+    && cmake -S ${PKG}-${VER} -B ${PKG}_build                              \
+    "-DBUILD_SHARED_LIBS=ON"                                               \
+    && make -C ${PKG}_build -j$(nproc) install/strip                       \
+    && rm -rf ${PKG}-${VER} ${PKG}_build ${PKG}-${VER}.tar.gz
+# --------------------------------------------------------------------------
+ARG PKG=Fast-DDS
+ARG VER=2.14.4
+RUN wget -q --content-disposition                                          \
+    https://codeload.github.com/eProsima/${PKG}/tar.gz/refs/tags/v${VER}
+RUN tar -zxf ${PKG}-${VER}.tar.gz                                          \
+    && cmake -S ${PKG}-${VER} -B ${PKG}_build                              \
+    "-DBUILD_SHARED_LIBS=ON"                                               \
+    && make -C ${PKG}_build -j$(nproc) install/strip                       \
+    && rm -rf ${PKG}-${VER} ${PKG}_build ${PKG}-${VER}.tar.gz
+# --------------------------------------------------------------------------
+RUN apt update && apt install openjdk-11-jdk
+ARG PKG=Fast-DDS-Gen
+ARG VER=3.3.1
+ARG VER_IDL=3.0.1
+RUN wget -q --content-disposition                                          \
+    https://codeload.github.com/eProsima/${PKG}/tar.gz/refs/tags/v${VER}
+RUN tar -zxf ${PKG}-${VER}.tar.gz                                          \
+    && sed -i 's/buildIDLParser.dependsOn\ submodulesUpdate/buildIDLParser.dependsOn/g' ${PKG}-${VER}/build.gradle
+
+RUN wget -q --content-disposition                                          \
+    https://codeload.github.com/eProsima/IDL-Parser/tar.gz/refs/tags/v${VER_IDL}
+RUN tar -zxf IDL-Parser-${VER_IDL}.tar.gz                                  \
+    && rm -rf ${PKG}-${VER}/thirdparty/idl-parser                          \
+    && mv IDL-Parser-${VER_IDL} Fast-DDS-Gen-${VER}/thirdparty/idl-parser  \
+    && rm -f IDL-Parser-${VER_IDL}.tar.gz
+
+RUN cd ${PKG}-${VER} && ./gradlew assemble && ./gradlew install
+# --------------------------------------------------------------------------
+RUN ldconfig
